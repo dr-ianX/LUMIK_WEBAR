@@ -52,17 +52,21 @@ npm start
 
 4. Abre tu navegador en `http://localhost:3000`
 
-## 🌐 Despliegue en GitHub Pages | GitHub Pages Deployment
+## 🌐 Despliegue en Render.com | Render.com Deployment
 
 ### Método Automático (Recomendado) | Automated Method (Recommended)
 
-1. Ve a la configuración del repositorio en GitHub
-2. Navega a **Settings** > **Pages**
-3. En **Source**, selecciona **Deploy from a branch**
-4. Elige la rama `main` y la carpeta `/ (root)`
-5. Haz clic en **Save**
+1. Ve a [render.com](https://render.com) y crea una cuenta
+2. Conecta tu repositorio de GitHub: `https://github.com/dr-ianX/LUMIK_WEBAR`
+3. Render detectará automáticamente el archivo `render.yaml`
+4. Configura el servicio web con las siguientes opciones:
+   - **Name:** lumik-webar
+   - **Runtime:** Node
+   - **Build Command:** `npm run build`
+   - **Start Command:** `npm start`
+5. Haz clic en **Create Web Service**
 
-Tu sitio estará disponible en: `https://dr-ianX.github.io/LUMIK_WEBAR/`
+Tu sitio estará disponible en: `https://lumik-webar.onrender.com`
 
 ### Método Manual | Manual Method
 
@@ -71,8 +75,11 @@ Tu sitio estará disponible en: `https://dr-ianX.github.io/LUMIK_WEBAR/`
 npm run build
 ```
 
-2. Los archivos compilados estarán en la carpeta `dist/`
-3. Sube el contenido de `dist/` a la rama `gh-pages`
+2. Sube manualmente la carpeta `dist/` a un servicio de hosting estático como:
+   - Netlify
+   - Vercel
+   - Surge.sh
+   - Cualquier servicio de hosting estático
 
 ## 📁 Estructura del Proyecto | Project Structure
 
