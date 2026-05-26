@@ -557,6 +557,7 @@ ar
 ar-modes="scene-viewer quick-look webxr"
 reveal="auto"
 loading="eager"
+disable-ar
 >
 </model-viewer>
 
@@ -1076,6 +1077,12 @@ const exitArBtn=document.getElementById('exitArButton');
 const exitArBtnEs=document.getElementById('exitArButtonEs');
 const viewer=document.getElementById('arViewer');
 
+// Ensure buttons are in correct initial state
+exitArBtn.style.display='none';
+exitArBtnEs.style.display='none';
+customArBtn.style.display='block';
+customArBtnEs.style.display='none';
+
 // Custom AR button click (English)
 customArBtn.addEventListener('click',()=>{
 if(viewer){
@@ -1102,8 +1109,6 @@ customArBtn.style.display='block';
 if(viewer && viewer.exitAR){
 viewer.exitAR();
 }
-// Fallback: reload page to exit AR
-location.reload();
 });
 
 // Exit AR button click (Spanish)
@@ -1114,18 +1119,35 @@ customArBtnEs.style.display='block';
 if(viewer && viewer.exitAR){
 viewer.exitAR();
 }
-// Fallback: reload page to exit AR
-location.reload();
 });
 
 // Handle AR session events
 if(viewer){
 viewer.addEventListener('ar-status',(event)=>{
+console.log('AR status:', event.detail.status);
 if(event.detail.status==='failed'){
 exitArBtn.style.display='none';
 customArBtn.style.display='block';
 exitArBtnEs.style.display='none';
 customArBtnEs.style.display='block';
+} else if(event.detail.status==='presented' || event.detail.status==='started'){
+// AR is active, show exit button
+if(currentLanguage === 'en'){
+exitArBtn.style.display='block';
+customArBtn.style.display='none';
+} else {
+exitArBtnEs.style.display='block';
+customArBtnEs.style.display='none';
+}
+} else if(event.detail.status==='exited' || event.detail.status==='stopped'){
+// AR is no longer active, show enter button
+if(currentLanguage === 'en'){
+exitArBtn.style.display='none';
+customArBtn.style.display='block';
+} else {
+exitArBtnEs.style.display='none';
+customArBtnEs.style.display='block';
+}
 }
 });
 }
