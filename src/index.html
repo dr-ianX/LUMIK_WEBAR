@@ -92,6 +92,39 @@ border:1px solid rgba(255,255,255,0.1);
 box-shadow:0 4px 20px rgba(0,212,255,0.2);
 }
 
+/* Language Toggle */
+.lang-toggle{
+position:fixed;
+top:20px;
+right:20px;
+z-index:2000;
+display:flex;
+background:var(--glass);
+border-radius:20px;
+padding:4px;
+backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,0.1);
+box-shadow:0 4px 20px rgba(0,212,255,0.2);
+}
+
+.lang-btn{
+padding:8px 16px;
+border:none;
+background:transparent;
+color:var(--gray);
+cursor:pointer;
+border-radius:16px;
+font-size:12px;
+font-weight:600;
+transition:all 0.3s;
+}
+
+.lang-btn.active{
+background:linear-gradient(90deg,var(--primary),var(--secondary));
+color:var(--dark);
+box-shadow:0 0 15px rgba(0,212,255,0.4);
+}
+
 .mode-btn{
 padding:10px 20px;
 border:none;
@@ -500,8 +533,16 @@ animation:gradient 3s ease infinite;
 
 <!-- Mode Toggle -->
 <div class="mode-toggle">
-<button class="mode-btn active" id="arModeBtn" onclick="setMode('ar')">AR View</button>
-<button class="mode-btn" id="infoModeBtn" onclick="setMode('info')">Info</button>
+<button class="mode-btn active" id="arModeBtn" onclick="setMode('ar')" data-lang="en">AR View</button>
+<button class="mode-btn" id="infoModeBtn" onclick="setMode('info')" data-lang="en">Info</button>
+<button class="mode-btn active" id="arModeBtnEs" onclick="setMode('ar')" data-lang="es" style="display:none;">Vista AR</button>
+<button class="mode-btn" id="infoModeBtnEs" onclick="setMode('info')" data-lang="es" style="display:none;">Info</button>
+</div>
+
+<!-- Language Toggle -->
+<div class="lang-toggle">
+<button class="lang-btn active" id="langEn" onclick="setLanguage('en')">EN</button>
+<button class="lang-btn" id="langEs" onclick="setLanguage('es')">ES</button>
 </div>
 
 <!-- AR Viewer -->
@@ -520,319 +561,369 @@ loading="eager"
 </model-viewer>
 
 <!-- Custom AR Button -->
-<button id="customArButton" class="ar-action-btn">📱 VER EN AR</button>
+<button id="customArButton" class="ar-action-btn" data-lang="en">📱 VIEW IN AR</button>
+<button id="customArButtonEs" class="ar-action-btn" data-lang="es" style="display:none;">📱 VER EN AR</button>
 
 <!-- Exit AR Button (hidden by default) -->
-<button id="exitArButton" class="exit-ar-btn" style="display: none;">✕ SALIR DE AR</button>
+<button id="exitArButton" class="exit-ar-btn" data-lang="en" style="display: none;">✕ EXIT AR</button>
+<button id="exitArButtonEs" class="exit-ar-btn" data-lang="es" style="display: none;">✕ SALIR DE AR</button>
 
 <!-- Information Panel -->
 <div class="info-panel" id="infoPanel">
 <header class="header">
 <h1 class="logo">LUMIK AR</h1>
-<p class="tagline">Tecnología Inmersiva por Artista Visual | Immersive Technology by Visual Artist</p>
+<p class="tagline" data-lang="en">Immersive Technology by DOCTOR IAN. AKA dR.iAn</p>
+<p class="tagline" data-lang="es" style="display:none;">Tecnología Inmersiva por DOCTOR IAN. AKA dR.iAn</p>
 </header>
 
 <section class="section">
-<h2 class="section-title">Sobre LUMIK | About LUMIK</h2>
+<h2 class="section-title" data-lang="en">About LUMIK</h2>
+<h2 class="section-title" data-lang="es" style="display:none;">Sobre LUMIK</h2>
 <div class="section-content">
-<p><strong>ES:</strong> LUMIK es una plataforma de tecnología inmersiva creada por un artista visual, dedicada a pushing the boundaries of experiencias interactivas 3D. Como practicante diario de las artes visuales, la tecnología y la creatividad se fusionan perfectamente en cada proyecto.</p>
-<p><strong>EN:</strong> LUMIK is an immersive technology platform created by a visual artist, dedicated to pushing the boundaries of interactive 3D experiences. As a daily practitioner of visual arts, technology and creativity merge seamlessly in every project.</p>
-<p><strong>ES:</strong> Nos especializamos en Realidad Aumentada (AR), Realidad Mixta (MR), videomapping, laser mapping y creando instalaciones audiovisuales inmersivas que transforman espacios en experiencias interactivas.</p>
-<p><strong>EN:</strong> We specialize in Augmented Reality (AR), Mixed Reality (MR), videomapping, laser mapping, and creating immersive audiovisual installations that transform spaces into interactive experiences.</p>
+<p data-lang="en">LUMIK is an immersive technology platform created by DOCTOR IAN (dR.iAn), an audiovisual, multidisciplinary, and immersive artist. I develop my own technology and provide experiences of light, holography, augmented reality, and spatial sound. I don't rent equipment—I create bespoke immersive installations that transform spaces into interactive experiences.</p>
+<p data-lang="es" style="display:none;">LUMIK es una plataforma de tecnología inmersiva creada por DOCTOR IAN (dR.iAn), un artista audiovisual, multidisciplinario e inmersivo. Desarrollo mi propia tecnología y brindo experiencias de luz, holografía, realidad aumentada y sonido espacial. No rento equipo—creo instalaciones inmersivas a medida que transforman espacios en experiencias interactivas.</p>
 </div>
 </section>
 
 <section class="section">
-<h2 class="section-title">Tecnologías que Usamos | Technologies We Use</h2>
+<h2 class="section-title" data-lang="en">Technologies We Use</h2>
+<h2 class="section-title" data-lang="es" style="display:none;">Tecnologías que Usamos</h2>
 <div class="tech-grid">
 <div class="tech-card">
-<h3>🌐 Realidad Aumentada (AR)</h3>
-<p><strong>ES:</strong> Superponemos contenido digital al mundo real a través de smartphones o gafas AR. Nuestras soluciones AR permiten a los clientes mostrar modelos 3D en entornos reales.</p>
-<p><strong>EN:</strong> Overlay digital content onto the real world through smartphones or AR glasses. Our AR solutions allow clients to showcase 3D models in real environments.</p>
+<h3 data-lang="en">🌐 Augmented Reality (AR)</h3>
+<h3 data-lang="es" style="display:none;">🌐 Realidad Aumentada (AR)</h3>
+<p data-lang="en">Overlay digital content onto the real world through smartphones or AR glasses. Our AR solutions allow clients to showcase 3D models in real environments.</p>
+<p data-lang="es" style="display:none;">Superponemos contenido digital al mundo real a través de smartphones o gafas AR. Nuestras soluciones AR permiten a los clientes mostrar modelos 3D en entornos reales.</p>
 </div>
 <div class="tech-card">
-<h3>🔮 Realidad Mixta (MR)</h3>
-<p><strong>ES:</strong> Fusionamos mundos físicos y digitales con conciencia espacial. Los objetos responden a entornos del mundo real en tiempo real.</p>
-<p><strong>EN:</strong> Blend physical and digital worlds with spatial awareness. Objects respond to real-world environments in real-time.</p>
+<h3 data-lang="en">🔮 Mixed Reality (MR)</h3>
+<h3 data-lang="es" style="display:none;">🔮 Realidad Mixta (MR)</h3>
+<p data-lang="en">Blend physical and digital worlds with spatial awareness. Objects respond to real-world environments in real-time.</p>
+<p data-lang="es" style="display:none;">Fusionamos mundos físicos y digitales con conciencia espacial. Los objetos responden a entornos del mundo real en tiempo real.</p>
 </div>
 <div class="tech-card">
-<h3>🎬 Videomapping</h3>
-<p><strong>ES:</strong> Proyectamos video sobre superficies irregulares como edificios, esculturas o escenarios para crear experiencias visuales inmersivas impresionantes.</p>
-<p><strong>EN:</strong> Project video onto irregular surfaces like buildings, sculptures, or stages to create stunning immersive visual experiences.</p>
+<h3 data-lang="en">🎬 Videomapping</h3>
+<h3 data-lang="es" style="display:none;">🎬 Videomapping</h3>
+<p data-lang="en">Project video onto irregular surfaces like buildings, sculptures, or stages to create stunning immersive visual experiences.</p>
+<p data-lang="es" style="display:none;">Proyectamos video sobre superficies irregulares como edificios, esculturas o escenarios para crear experiencias visuales inmersivas impresionantes.</p>
 </div>
 <div class="tech-card">
-<h3>⚡ Laser Mapping</h3>
-<p><strong>ES:</strong> Proyecciones láser de precisión que crean instalaciones de luz interactivas. Utilizadas para presentaciones en vivo, eventos e instalaciones permanentes.</p>
-<p><strong>EN:</strong> Precision laser projections that create interactive light installations. Used for live performances, events, and permanent installations.</p>
+<h3 data-lang="en">⚡ Laser Mapping</h3>
+<h3 data-lang="es" style="display:none;">⚡ Laser Mapping</h3>
+<p data-lang="en">Precision laser projections that create interactive light installations. Used for live performances, events, and permanent installations.</p>
+<p data-lang="es" style="display:none;">Proyecciones láser de precisión que crean instalaciones de luz interactivas. Utilizadas para presentaciones en vivo, eventos e instalaciones permanentes.</p>
 </div>
 <div class="tech-card">
-<h3>🎨 Modelado 3D</h3>
-<p><strong>ES:</strong> Modelos 3D personalizados creados desde cero o convertidos de diseños existentes. Optimizados para web, AR e impresión.</p>
-<p><strong>EN:</strong> Custom 3D models created from scratch or converted from existing designs. Optimized for web, AR, and print.</p>
+<h3 data-lang="en">🎨 3D Modeling</h3>
+<h3 data-lang="es" style="display:none;">🎨 Modelado 3D</h3>
+<p data-lang="en">Custom 3D models created from scratch or converted from existing designs. Optimized for web, AR, and print.</p>
+<p data-lang="es" style="display:none;">Modelos 3D personalizados creados desde cero o convertidos de diseños existentes. Optimizados para web, AR e impresión.</p>
 </div>
 <div class="tech-card">
-<h3>🎵 Audiovisual Inmersivo</h3>
-<p><strong>ES:</strong> Combinamos visuales 3D con audio espacial para experiencias completamente inmersivas que involucran todos los sentidos.</p>
-<p><strong>EN:</strong> Combine 3D visuals with spatial audio for fully immersive experiences that engage all senses.</p>
+<h3 data-lang="en">🎵 Spatial Sound</h3>
+<h3 data-lang="es" style="display:none;">🎵 Sonido Espacial</h3>
+<p data-lang="en">Combine 3D visuals with spatial audio for fully immersive experiences that engage all senses.</p>
+<p data-lang="es" style="display:none;">Combinamos visuales 3D con audio espacial para experiencias completamente inmersivas que involucran todos los sentidos.</p>
 </div>
 </div>
 </section>
 
 <section class="section">
-<h2 class="section-title">Nuestros Servicios | Our Services</h2>
+<h2 class="section-title" data-lang="en">Our Services</h2>
+<h2 class="section-title" data-lang="es" style="display:none;">Nuestros Servicios</h2>
 <ul class="services-list">
-<li>✦ Creación y Optimización de Modelos 3D Personalizados | Custom 3D Model Creation & Optimization</li>
-<li>✦ Experiencias AR Interactivas para Web y Móvil | Interactive AR Experiences for Web & Mobile</li>
-<li>✦ Instalaciones de Videomapping | Videomapping Installations</li>
-<li>✦ Laser Mapping para Eventos y Venues | Laser Mapping for Events & Venues</li>
-<li>✦ Aplicaciones de Realidad Mixta | Mixed Reality Applications</li>
-<li>✦ Exposiciones Audiovisuales Inmersivas | Immersive Audiovisual Exhibitions</li>
-<li>✦ Renders 3D para Diseño de Proyección | 3D Renders for Projection Design</li>
-<li>✦ Esculturas y Piezas de Arte Personalizadas | Custom Sculptures & Art Pieces</li>
+<li data-lang="en">✦ Custom 3D Model Creation & Optimization</li>
+<li data-lang="es" style="display:none;">✦ Creación y Optimización de Modelos 3D Personalizados</li>
+<li data-lang="en">✦ Interactive AR Experiences for Web & Mobile</li>
+<li data-lang="es" style="display:none;">✦ Experiencias AR Interactivas para Web y Móvil</li>
+<li data-lang="en">✦ Videomapping Installations</li>
+<li data-lang="es" style="display:none;">✦ Instalaciones de Videomapping</li>
+<li data-lang="en">✦ Laser Mapping for Events & Venues</li>
+<li data-lang="es" style="display:none;">✦ Laser Mapping para Eventos y Venues</li>
+<li data-lang="en">✦ Mixed Reality Applications</li>
+<li data-lang="es" style="display:none;">✦ Aplicaciones de Realidad Mixta</li>
+<li data-lang="en">✦ Immersive Audiovisual Exhibitions</li>
+<li data-lang="es" style="display:none;">✦ Exposiciones Audiovisuales Inmersivas</li>
+<li data-lang="en">✦ 3D Renders for Projection Design</li>
+<li data-lang="es" style="display:none;">✦ Renders 3D para Diseño de Proyección</li>
+<li data-lang="en">✦ Custom Sculptures & Art Pieces</li>
+<li data-lang="es" style="display:none;">✦ Esculturas y Piezas de Arte Personalizadas</li>
 </ul>
 </section>
 
 <section class="section">
-<h2 class="section-title">¿Qué es la Realidad Aumentada? | What is Augmented Reality?</h2>
+<h2 class="section-title" data-lang="en">What is Augmented Reality?</h2>
+<h2 class="section-title" data-lang="es" style="display:none;">¿Qué es la Realidad Aumentada?</h2>
 <div class="section-content">
-<p><strong>ES:</strong> La Realidad Aumentada (AR) mejora tu entorno del mundo real superponiendo información digital—incluyendo modelos 3D, videos, sonidos y datos—sobre lo que ves a través de una cámara o pantalla.</p>
-<p><strong>EN:</strong> Augmented Reality (AR) enhances your real-world environment by overlaying digital information—including 3D models, videos, sounds, and data—onto what you see through a camera or display.</p>
-<p><strong>ES:</strong> A diferencia de la Realidad Virtual (VR), que crea un entorno completamente artificial, la AR aumenta tu realidad existente. Esto hace que la AR sea ideal para:</p>
-<p><strong>EN:</strong> Unlike Virtual Reality (VR), which creates a completely artificial environment, AR augments your existing reality. This makes AR ideal for:</p>
+<p data-lang="en">Augmented Reality (AR) enhances your real-world environment by overlaying digital information—including 3D models, videos, sounds, and data—onto what you see through a camera or display.</p>
+<p data-lang="es" style="display:none;">La Realidad Aumentada (AR) mejora tu entorno del mundo real superponiendo información digital—incluyendo modelos 3D, videos, sonidos y datos—sobre lo que ves a través de una cámara o pantalla.</p>
+<p data-lang="en">Unlike Virtual Reality (VR), which creates a completely artificial environment, AR augments your existing reality. This makes AR ideal for:</p>
+<p data-lang="es" style="display:none;">A diferencia de la Realidad Virtual (VR), que crea un entorno completamente artificial, la AR aumenta tu realidad existente. Esto hace que la AR sea ideal para:</p>
 <ul>
-<li><strong>ES:</strong> <strong>Visualización de productos</strong> - Coloca modelos 3D en tu espacio real antes de comprar</li>
-<li><strong>EN:</strong> <strong>Product visualization</strong> - Place 3D models in your actual space before purchasing</li>
-<li><strong>ES:</strong> <strong>Educación</strong> - Visualizaciones 3D interactivas para el aprendizaje</li>
-<li><strong>EN:</strong> <strong>Education</strong> - Interactive 3D visualizations for learning</li>
-<li><strong>ES:</strong> <strong>Entretenimiento</strong> - Experiencias inmersivas en eventos y museos</li>
-<li><strong>EN:</strong> <strong>Entertainment</strong> - Immersive experiences at events and museums</li>
-<li><strong>ES:</strong> <strong>Instalaciones artísticas</strong> - Fusionando tecnología con arte visual</li>
-<li><strong>EN:</strong> <strong>Art installations</strong> - Blending technology with visual art</li>
-<li><strong>ES:</strong> <strong>Marketing</strong> - Campañas interactivas que involucran a los clientes</li>
-<li><strong>EN:</strong> <strong>Marketing</strong> - Interactive campaigns that engage customers</li>
+<li data-lang="en"><strong>Product visualization</strong> - Place 3D models in your actual space before purchasing</li>
+<li data-lang="es" style="display:none;"><strong>Visualización de productos</strong> - Coloca modelos 3D en tu espacio real antes de comprar</li>
+<li data-lang="en"><strong>Education</strong> - Interactive 3D visualizations for learning</li>
+<li data-lang="es" style="display:none;"><strong>Educación</strong> - Visualizaciones 3D interactivas para el aprendizaje</li>
+<li data-lang="en"><strong>Entertainment</strong> - Immersive experiences at events and museums</li>
+<li data-lang="es" style="display:none;"><strong>Entretenimiento</strong> - Experiencias inmersivas en eventos y museos</li>
+<li data-lang="en"><strong>Art installations</strong> - Blending technology with visual art</li>
+<li data-lang="es" style="display:none;"><strong>Instalaciones artísticas</strong> - Fusionando tecnología con arte visual</li>
+<li data-lang="en"><strong>Marketing</strong> - Interactive campaigns that engage customers</li>
+<li data-lang="es" style="display:none;"><strong>Marketing</strong> - Campañas interactivas que involucran a los clientes</li>
 </ul>
 </div>
 </section>
 
 <section class="section">
-<h2 class="section-title">¿Qué es la Realidad Mixta? | What is Mixed Reality?</h2>
+<h2 class="section-title" data-lang="en">What is Mixed Reality?</h2>
+<h2 class="section-title" data-lang="es" style="display:none;">¿Qué es la Realidad Mixta?</h2>
 <div class="section-content">
-<p><strong>ES:</strong> La Realidad Mixta (MR) va más allá de la AR al permitir que los objetos digitales interactúen y respondan al entorno del mundo real en tiempo real.</p>
-<p><strong>EN:</strong> Mixed Reality (MR) goes beyond AR by enabling digital objects to interact with and respond to the real-world environment in real-time.</p>
-<p><strong>ES:</strong> Diferencias clave con la AR:</p>
-<p><strong>EN:</strong> Key differences from AR:</p>
+<p data-lang="en">Mixed Reality (MR) goes beyond AR by enabling digital objects to interact with and respond to the real-world environment in real-time.</p>
+<p data-lang="es" style="display:none;">La Realidad Mixta (MR) va más allá de la AR al permitir que los objetos digitales interactúen y respondan al entorno del mundo real en tiempo real.</p>
+<p data-lang="en">Key differences from AR:</p>
+<p data-lang="es" style="display:none;">Diferencias clave con la AR:</p>
 <ul>
-<li><strong>ES:</strong> <strong>Mapeo espacial</strong> - El objeto digital entiende y responde a superficies, bordes y geometría en tu habitación</li>
-<li><strong>EN:</strong> <strong>Spatial mapping</strong> - The digital object understands and responds to surfaces, edges, and geometry in your room</li>
-<li><strong>ES:</strong> <strong>Oclusión</strong> - Los objetos reales pueden bloquear objetos digitales de la vista</li>
-<li><strong>EN:</strong> <strong>Occlusion</strong> - Real objects can block digital objects from view</li>
-<li><strong>ES:</strong> <strong>Interacción física</strong> - Los objetos digitales pueden "sentarse" en mesas, rebotar en pisos o deslizarse debajo de objetos</li>
-<li><strong>EN:</strong> <strong>Physics interaction</strong> - Digital objects can "sit" on tables, bounce off floors, or slide under objects</li>
-<li><strong>ES:</strong> <strong>Hologramas persistentes</strong> - Coloca contenido AR que permanece anclado a ubicaciones reales</li>
-<li><strong>EN:</strong> <strong>Persistent holograms</strong> - Place AR content that stays anchored to real locations</li>
+<li data-lang="en"><strong>Spatial mapping</strong> - The digital object understands and responds to surfaces, edges, and geometry in your room</li>
+<li data-lang="es" style="display:none;"><strong>Mapeo espacial</strong> - El objeto digital entiende y responde a superficies, bordes y geometría en tu habitación</li>
+<li data-lang="en"><strong>Occlusion</strong> - Real objects can block digital objects from view</li>
+<li data-lang="es" style="display:none;"><strong>Oclusión</strong> - Los objetos reales pueden bloquear objetos digitales de la vista</li>
+<li data-lang="en"><strong>Physics interaction</strong> - Digital objects can "sit" on tables, bounce off floors, or slide under objects</li>
+<li data-lang="es" style="display:none;"><strong>Interacción física</strong> - Los objetos digitales pueden "sentarse" en mesas, rebotar en pisos o deslizarse debajo de objetos</li>
+<li data-lang="en"><strong>Persistent holograms</strong> - Place AR content that stays anchored to real locations</li>
+<li data-lang="es" style="display:none;"><strong>Hologramas persistentes</strong> - Coloca contenido AR que permanece anclado a ubicaciones reales</li>
 </ul>
 </div>
 </section>
 
 <section class="section">
-<h2 class="section-title">¿Qué es el Videomapping? | What is Videomapping?</h2>
+<h2 class="section-title" data-lang="en">What is Videomapping?</h2>
+<h2 class="section-title" data-lang="es" style="display:none;">¿Qué es el Videomapping?</h2>
 <div class="section-content">
-<p><strong>ES:</strong> El Videomapping (también llamado projection mapping) es una tecnología de proyección utilizada para convertir objetos de forma irregular—a menudo edificios, espacios interiores o esculturas—en una superficie de visualización para proyección de video.</p>
-<p><strong>EN:</strong> Videomapping (also called projection mapping) is a projection technology used to turn irregular-shaped objects—often buildings, interior spaces, or sculptures—into a display surface for video projection.</p>
-<p><strong>ES:</strong> Aplicaciones incluyen:</p>
-<p><strong>EN:</strong> Applications include:</p>
+<p data-lang="en">Videomapping (also called projection mapping) is a projection technology used to turn irregular-shaped objects—often buildings, interior spaces, or sculptures—into a display surface for video projection.</p>
+<p data-lang="es" style="display:none;">El Videomapping (también llamado projection mapping) es una tecnología de proyección utilizada para convertir objetos de forma irregular—a menudo edificios, espacios interiores o esculturas—en una superficie de visualización para proyección de video.</p>
+<p data-lang="en">Applications include:</p>
+<p data-lang="es" style="display:none;">Aplicaciones incluyen:</p>
 <ul>
-<li><strong>ES:</strong> <strong>Eventos en vivo</strong> - Fondos visuales impresionantes para conciertos y presentaciones</li>
-<li><strong>EN:</strong> <strong>Live events</strong> - Stunning visual backdrops for concerts and performances</li>
-<li><strong>ES:</strong> <strong>Activaciones de marca</strong> - Instalaciones promocionales llamativas</li>
-<li><strong>EN:</strong> <strong>Brand activations</strong> - Eye-catching promotional installations</li>
-<li><strong>ES:</strong> <strong>Museos</strong> - Exposiciones educativas interactivas</li>
-<li><strong>EN:</strong> <strong>Museums</strong> - Interactive educational exhibits</li>
-<li><strong>ES:</strong> <strong>Iluminación arquitectónica</strong> - Transforma edificios de noche</li>
-<li><strong>EN:</strong> <strong>Architectural lighting</strong> - Transform buildings at night</li>
-<li><strong>ES:</strong> <strong>Diseño de escenario</strong> - Escenarios dinámicos sin sets físicos</li>
-<li><strong>EN:</strong> <strong>Stage design</strong> - Dynamic scenery without physical sets</li>
+<li data-lang="en"><strong>Live events</strong> - Stunning visual backdrops for concerts and performances</li>
+<li data-lang="es" style="display:none;"><strong>Eventos en vivo</strong> - Fondos visuales impresionantes para conciertos y presentaciones</li>
+<li data-lang="en"><strong>Brand activations</strong> - Eye-catching promotional installations</li>
+<li data-lang="es" style="display:none;"><strong>Activaciones de marca</strong> - Instalaciones promocionales llamativas</li>
+<li data-lang="en"><strong>Museums</strong> - Interactive educational exhibits</li>
+<li data-lang="es" style="display:none;"><strong>Museos</strong> - Exposiciones educativas interactivas</li>
+<li data-lang="en"><strong>Architectural lighting</strong> - Transform buildings at night</li>
+<li data-lang="es" style="display:none;"><strong>Iluminación arquitectónica</strong> - Transforma edificios de noche</li>
+<li data-lang="en"><strong>Stage design</strong> - Dynamic scenery without physical sets</li>
+<li data-lang="es" style="display:none;"><strong>Diseño de escenario</strong> - Escenarios dinámicos sin sets físicos</li>
 </ul>
 </div>
 </section>
 
 <section class="section">
-<h2 class="section-title">¿Qué es el Laser Mapping? | What is Laser Mapping?</h2>
+<h2 class="section-title" data-lang="en">What is Laser Mapping?</h2>
+<h2 class="section-title" data-lang="es" style="display:none;">¿Qué es el Laser Mapping?</h2>
 <div class="section-content">
-<p><strong>ES:</strong> El laser mapping utiliza proyectores láser de precisión para crear instalaciones de luz nítidas, brillantes y animadas. A diferencia de la proyección tradicional, el laser mapping ofrece:</p>
-<p><strong>EN:</strong> Laser mapping uses precision laser projectors to create sharp, bright, and animated light installations. Unlike traditional projection, laser mapping offers:</p>
+<p data-lang="en">Laser mapping uses precision laser projectors to create sharp, bright, and animated light installations. Unlike traditional projection, laser mapping offers:</p>
+<p data-lang="es" style="display:none;">El laser mapping utiliza proyectores láser de precisión para crear instalaciones de luz nítidas, brillantes y animadas. A diferencia de la proyección tradicional, el laser mapping ofrece:</p>
 <ul>
-<li><strong>ES:</strong> <strong>Brillo extremo</strong> - Visible a la luz del día</li>
-<li><strong>EN:</strong> <strong>Extreme brightness</strong> - Visible in daylight</li>
-<li><strong>ES:</strong> <strong>Nitidez perfecta</strong> - Sin desenfoque o problemas de enfoque</li>
-<li><strong>EN:</strong> <strong>Perfect sharpness</strong> - No blur or focus issues</li>
-<li><strong>ES:</strong> <strong>Animación dinámica</strong> - Espectáculos de luz coreografiados complejos</li>
-<li><strong>EN:</strong> <strong>Dynamic animation</strong> - Complex, choreographed light shows</li>
-<li><strong>ES:</strong> <strong>Control remoto</strong> - Programable desde cualquier lugar</li>
-<li><strong>EN:</strong> <strong>Remote control</strong> - Programmable from anywhere</li>
-<li><strong>ES:</strong> <strong>Opciones de seguridad</strong> - Clasificaciones seguras para los ojos disponibles</li>
-<li><strong>EN:</strong> <strong>Safety options</strong> - Eye-safe classifications available</li>
+<li data-lang="en"><strong>Extreme brightness</strong> - Visible in daylight</li>
+<li data-lang="es" style="display:none;"><strong>Brillo extremo</strong> - Visible a la luz del día</li>
+<li data-lang="en"><strong>Perfect sharpness</strong> - No blur or focus issues</li>
+<li data-lang="es" style="display:none;"><strong>Nitidez perfecta</strong> - Sin desenfoque o problemas de enfoque</li>
+<li data-lang="en"><strong>Dynamic animation</strong> - Complex, choreographed light shows</li>
+<li data-lang="es" style="display:none;"><strong>Animación dinámica</strong> - Espectáculos de luz coreografiados complejos</li>
+<li data-lang="en"><strong>Remote control</strong> - Programmable from anywhere</li>
+<li data-lang="es" style="display:none;"><strong>Control remoto</strong> - Programable desde cualquier lugar</li>
+<li data-lang="en"><strong>Safety options</strong> - Eye-safe classifications available</li>
+<li data-lang="es" style="display:none;"><strong>Opciones de seguridad</strong> - Clasificaciones seguras para los ojos disponibles</li>
 </ul>
-<p><strong>ES:</strong> Perfecto para conciertos, eventos corporativos, instalaciones de arte e iluminación arquitectónica permanente.</p>
-<p><strong>EN:</strong> Perfect for concerts, corporate events, art installations, and permanent architectural lighting.</p>
+<p data-lang="en">Perfect for concerts, corporate events, art installations, and permanent architectural lighting.</p>
+<p data-lang="es" style="display:none;">Perfecto para conciertos, eventos corporativos, instalaciones de arte e iluminación arquitectónica permanente.</p>
 </div>
 </section>
 
 <section class="section">
-<h2 class="section-title">Contáctanos | Contact Us</h2>
+<h2 class="section-title" data-lang="en">Contact Us</h2>
+<h2 class="section-title" data-lang="es" style="display:none;">Contáctanos</h2>
 <div class="section-content">
-<p><strong>ES:</strong> ¿Interesado en crear una experiencia inmersiva para tu proyecto? Nos encantaría saber de ti.</p>
-<p><strong>EN:</strong> Interested in creating an immersive experience for your project? We'd love to hear from you.</p>
-<a href="mailto:hello@lumik.ar" class="contact-btn">✉ CONTÁCTANOS | GET IN TOUCH</a>
+<p data-lang="en">Interested in creating an immersive experience for your project? We'd love to hear from you.</p>
+<p data-lang="es" style="display:none;">¿Interesado en crear una experiencia inmersiva para tu proyecto? Nos encantaría saber de ti.</p>
+<a href="mailto:hello@lumik.ar" class="contact-btn" data-lang="en">✉ GET IN TOUCH</a>
+<a href="mailto:hello@lumik.ar" class="contact-btn" data-lang="es" style="display:none;">✓ CONTÁCTANOS</a>
 </div>
 </section>
 
 <section class="section">
-<h2 class="section-title">🌍 Beneficios de la AR para la Humanidad | AR Benefits for Humanity</h2>
+<h2 class="section-title" data-lang="en">AR Benefits for Humanity</h2>
+<h2 class="section-title" data-lang="es" style="display:none;">Beneficios de la AR para la Humanidad</h2>
 <div class="section-content">
-<p><strong>ES:</strong> La Realidad Aumentada no es solo tecnología para entretenimiento; tiene el potencial de transformar positivamente la sociedad en múltiples aspectos:</p>
-<p><strong>EN:</strong> Augmented Reality is not just technology for entertainment; it has the potential to positively transform society in multiple ways:</p>
+<p data-lang="en">Augmented Reality is not just technology for entertainment; it has the potential to positively transform society in multiple ways:</p>
+<p data-lang="es" style="display:none;">La Realidad Aumentada no es solo tecnología para entretenimiento; tiene el potencial de transformar positivamente la sociedad en múltiples aspectos:</p>
 </div>
 <div class="tech-grid">
 <div class="tech-card">
-<h3>🏥 Educación y Salud</h3>
-<p><strong>ES:</strong> La AR permite a estudiantes y profesionales visualizar conceptos complejos en 3D, desde anatomía humana hasta estructuras moleculares. En medicina, ayuda en cirugías precisas y entrenamiento médico.</p>
-<p><strong>EN:</strong> AR allows students and professionals to visualize complex concepts in 3D, from human anatomy to molecular structures. In medicine, it assists in precise surgeries and medical training.</p>
+<h3 data-lang="en">🏥 Education & Healthcare</h3>
+<h3 data-lang="es" style="display:none;">🏥 Educación y Salud</h3>
+<p data-lang="en">AR allows students and professionals to visualize complex concepts in 3D, from human anatomy to molecular structures. In medicine, it assists in precise surgeries and medical training.</p>
+<p data-lang="es" style="display:none;">La AR permite a estudiantes y profesionales visualizar conceptos complejos en 3D, desde anatomía humana hasta estructuras moleculares. En medicina, ayuda en cirugías precisas y entrenamiento médico.</p>
 </div>
 <div class="tech-card">
-<h3>♿ Accesibilidad e Inclusión</h3>
-<p><strong>ES:</strong> La AR puede ayudar a personas con discapacidades visuales o auditivas proporcionando información contextual del entorno. También facilita la comunicación en diferentes idiomas en tiempo real.</p>
-<p><strong>EN:</strong> AR can help people with visual or hearing impairments by providing contextual environmental information. It also facilitates real-time communication across different languages.</p>
+<h3 data-lang="en">♿ Accessibility & Inclusion</h3>
+<h3 data-lang="es" style="display:none;">♿ Accesibilidad e Inclusión</h3>
+<p data-lang="en">AR can help people with visual or hearing impairments by providing contextual environmental information. It also facilitates real-time communication across different languages.</p>
+<p data-lang="es" style="display:none;">La AR puede ayudar a personas con discapacidades visuales o auditivas proporcionando información contextual del entorno. También facilita la comunicación en diferentes idiomas en tiempo real.</p>
 </div>
 <div class="tech-card">
-<h3>🌱 Sostenibilidad</h3>
-<p><strong>ES:</strong> Al permitir visualización digital de productos, la AR reduce la necesidad de prototipos físicos, disminuyendo el consumo de materiales y residuos. También optimiza el consumo de energía en arquitectura y diseño.</p>
-<p><strong>EN:</strong> By enabling digital product visualization, AR reduces the need for physical prototypes, decreasing material consumption and waste. It also optimizes energy consumption in architecture and design.</p>
+<h3 data-lang="en">🌱 Sustainability</h3>
+<h3 data-lang="es" style="display:none;">🌱 Sostenibilidad</h3>
+<p data-lang="en">By enabling digital product visualization, AR reduces the need for physical prototypes, decreasing material consumption and waste. It also optimizes energy consumption in architecture and design.</p>
+<p data-lang="es" style="display:none;">Al permitir visualización digital de productos, la AR reduce la necesidad de prototipos físicos, disminuyendo el consumo de materiales y residuos. También optimiza el consumo de energía en arquitectura y diseño.</p>
 </div>
 <div class="tech-card">
-<h3>🔬 Investigación Científica</h3>
-<p><strong>ES:</strong> Científicos utilizan AR para visualizar datos complejos, simular experimentos y colaborar en tiempo real con colegas alrededor del mundo, acelerando el descubrimiento científico.</p>
-<p><strong>EN:</strong> Scientists use AR to visualize complex data, simulate experiments, and collaborate in real-time with colleagues worldwide, accelerating scientific discovery.</p>
+<h3 data-lang="en">🔬 Scientific Research</h3>
+<h3 data-lang="es" style="display:none;">🔬 Investigación Científica</h3>
+<p data-lang="en">Scientists use AR to visualize complex data, simulate experiments, and collaborate in real-time with colleagues worldwide, accelerating scientific discovery.</p>
+<p data-lang="es" style="display:none;">Científicos utilizan AR para visualizar datos complejos, simular experimentos y colaborar en tiempo real con colegas alrededor del mundo, acelerando el descubrimiento científico.</p>
 </div>
 </div>
 </section>
 
 <section class="section">
-<h2 class="section-title">🎉 AR para Eventos y Experiencias | AR for Events and Experiences</h2>
+<h2 class="section-title" data-lang="en">AR for Events and Experiences</h2>
+<h2 class="section-title" data-lang="es" style="display:none;">AR para Eventos y Experiencias</h2>
 <div class="section-content">
-<p><strong>ES:</strong> La Realidad Aumentada revoluciona la industria de eventos, creando experiencias memorables e interactivas que dejan una impresión duradera en los asistentes.</p>
-<p><strong>EN:</strong> Augmented Reality revolutionizes the event industry, creating memorable and interactive experiences that leave a lasting impression on attendees.</p>
+<p data-lang="en">Augmented Reality revolutionizes the event industry, creating memorable and interactive experiences that leave a lasting impression on attendees.</p>
+<p data-lang="es" style="display:none;">La Realidad Aumentada revoluciona la industria de eventos, creando experiencias memorables e interactivas que dejan una impresión duradera en los asistentes.</p>
 </div>
 <div class="tech-grid">
 <div class="tech-card">
-<h3>🎵 Festivales de Música</h3>
-<p><strong>ES:</strong> Efectos visuales AR que responden a la música, creando paisajes inmersivos que transforman el escenario en mundos fantásticos sincronizados con cada beat.</p>
-<p><strong>EN:</strong> AR visual effects that respond to music, creating immersive landscapes that transform the stage into fantastical worlds synchronized with every beat.</p>
+<h3 data-lang="en">🎵 Music Festivals</h3>
+<h3 data-lang="es" style="display:none;">🎵 Festivales de Música</h3>
+<p data-lang="en">AR visual effects that respond to music, creating immersive landscapes that transform the stage into fantastical worlds synchronized with every beat.</p>
+<p data-lang="es" style="display:none;">Efectos visuales AR que responden a la música, creando paisajes inmersivos que transforman el escenario en mundos fantásticos sincronizados con cada beat.</p>
 </div>
 <div class="tech-card">
-<h3>🏟️ Eventos Deportivos</h3>
-<p><strong>ES:</strong> Estadísticas en tiempo real, repeticiones desde múltiples ángulos y contenido interactivo que mejora la experiencia de los fanáticos en estadios y arenas.</p>
-<p><strong>EN:</strong> Real-time statistics, multi-angle replays, and interactive content that enhances the fan experience in stadiums and arenas.</p>
+<h3 data-lang="en">🏟️ Sports Events</h3>
+<h3 data-lang="es" style="display:none;">🏟️ Eventos Deportivos</h3>
+<p data-lang="en">Real-time statistics, multi-angle replays, and interactive content that enhances the fan experience in stadiums and arenas.</p>
+<p data-lang="es" style="display:none;">Estadísticas en tiempo real, repeticiones desde múltiples ángulos y contenido interactivo que mejora la experiencia de los fanáticos en estadios y arenas.</p>
 </div>
 <div class="tech-card">
-<h3>🏢 Conferencias Corporativas</h3>
-<p><strong>ES:</strong> Presentaciones interactivas donde los asistentes pueden visualizar productos 3D, explorar datos complejos y participar en encuestas en tiempo real desde sus dispositivos.</p>
-<p><strong>EN:</strong> Interactive presentations where attendees can visualize 3D products, explore complex data, and participate in real-time polls from their devices.</p>
+<h3 data-lang="en">🏢 Corporate Conferences</h3>
+<h3 data-lang="es" style="display:none;">🏢 Conferencias Corporativas</h3>
+<p data-lang="en">Interactive presentations where attendees can visualize 3D products, explore complex data, and participate in real-time polls from their devices.</p>
+<p data-lang="es" style="display:none;">Presentaciones interactivas donde los asistentes pueden visualizar productos 3D, explorar datos complejos y participar en encuestas en tiempo real desde sus dispositivos.</p>
 </div>
 <div class="tech-card">
-<h3>🎨 Exposiciones de Arte</h3>
-<p><strong>ES:</strong> Obras de arte que cobran vida a través de AR, permitiendo a los visitantes interactuar con las piezas, descubrir capas ocultas y experimentar arte de nuevas formas.</p>
-<p><strong>EN:</strong> Artworks that come to life through AR, allowing visitors to interact with pieces, discover hidden layers, and experience art in new ways.</p>
+<h3 data-lang="en">🎨 Art Exhibitions</h3>
+<h3 data-lang="es" style="display:none;">🎨 Exposiciones de Arte</h3>
+<p data-lang="en">Artworks that come to life through AR, allowing visitors to interact with pieces, discover hidden layers, and experience art in new ways.</p>
+<p data-lang="es" style="display:none;">Obras de arte que cobran vida a través de AR, permitiendo a los visitantes interactuar con las piezas, descubrir capas ocultas y experimentar arte de nuevas formas.</p>
 </div>
 <div class="tech-card">
-<h3>🎪 Ferias y Activaciones</h3>
-<p><strong>ES:</strong> Stands interactivos donde los productos pueden ser visualizados en AR, juegos gamificados y experiencias compartidas que aumentan el engagement y recuerdo de marca.</p>
-<p><strong>EN:</strong> Interactive booths where products can be visualized in AR, gamified experiences, and shared interactions that increase brand engagement and recall.</p>
+<h3 data-lang="en">🎪 Trade Shows & Activations</h3>
+<h3 data-lang="es" style="display:none;">🎪 Ferias y Activaciones</h3>
+<p data-lang="en">Interactive booths where products can be visualized in AR, gamified experiences, and shared interactions that increase brand engagement and recall.</p>
+<p data-lang="es" style="display:none;">Stands interactivos donde los productos pueden ser visualizados en AR, juegos gamificados y experiencias compartidas que aumentan el engagement y recuerdo de marca.</p>
 </div>
 <div class="tech-card">
-<h3>🎓 Ceremonias de Graduación</h3>
-<p><strong>ES:</strong> Experiencias conmemorativas donde los graduados pueden dejar mensajes virtuales, crear fotos AR con familiares y celebrar con efectos especiales personalizados.</p>
-<p><strong>EN:</strong> Commemorative experiences where graduates can leave virtual messages, create AR photos with family, and celebrate with personalized special effects.</p>
+<h3 data-lang="en">🎓 Graduation Ceremonies</h3>
+<h3 data-lang="es" style="display:none;">🎓 Ceremonias de Graduación</h3>
+<p data-lang="en">Commemorative experiences where graduates can leave virtual messages, create AR photos with family, and celebrate with personalized special effects.</p>
+<p data-lang="es" style="display:none;">Experiencias conmemorativas donde los graduados pueden dejar mensajes virtuales, crear fotos AR con familiares y celebrar con efectos especiales personalizados.</p>
 </div>
 </div>
 </section>
 
 <section class="section">
-<h2 class="section-title">🎨 Nuestro Proceso Creativo | Our Creative Process</h2>
+<h2 class="section-title" data-lang="en">Our Creative Process</h2>
+<h2 class="section-title" data-lang="es" style="display:none;">Nuestro Proceso Creativo</h2>
 <div class="section-content">
-<p><strong>ES:</strong> Cada proyecto en LUMIK sigue un proceso meticuloso que combina arte, tecnología y pasión para crear experiencias inmersivas únicas.</p>
-<p><strong>EN:</strong> Every project at LUMIK follows a meticulous process that combines art, technology, and passion to create unique immersive experiences.</p>
+<p data-lang="en">Every project at LUMIK follows a meticulous process that combines art, technology, and passion to create unique immersive experiences.</p>
+<p data-lang="es" style="display:none;">Cada proyecto en LUMIK sigue un proceso meticuloso que combina arte, tecnología y pasión para crear experiencias inmersivas únicas.</p>
 </div>
 <div class="tech-grid">
 <div class="tech-card">
-<h3>1. 💡 Conceptualización</h3>
-<p><strong>ES:</strong> Comenzamos con una sesión de brainstorming profunda para entender la visión del cliente y los objetivos del proyecto. Definimos la narrativa y el impacto emocional deseado.</p>
-<p><strong>EN:</strong> We start with an in-depth brainstorming session to understand the client's vision and project objectives. We define the narrative and desired emotional impact.</p>
+<h3 data-lang="en">1. 💡 Conceptualization</h3>
+<h3 data-lang="es" style="display:none;">1. 💡 Conceptualización</h3>
+<p data-lang="en">We start with an in-depth brainstorming session to understand the client's vision and project objectives. We define the narrative and desired emotional impact.</p>
+<p data-lang="es" style="display:none;">Comenzamos con una sesión de brainstorming profunda para entender la visión del cliente y los objetivos del proyecto. Definimos la narrativa y el impacto emocional deseado.</p>
 </div>
 <div class="tech-card">
-<h3>2. 🎯 Diseño y Planificación</h3>
-<p><strong>ES:</strong> Creamos storyboards, moodboards y planos técnicos detallados. Cada aspecto visual y técnico se planifica meticulosamente antes de la producción.</p>
-<p><strong>EN:</strong> We create storyboards, moodboards, and detailed technical plans. Every visual and technical aspect is meticulously planned before production.</p>
+<h3 data-lang="en">2. 🎯 Design & Planning</h3>
+<h3 data-lang="es" style="display:none;">2. 🎯 Diseño y Planificación</h3>
+<p data-lang="en">We create storyboards, moodboards, and detailed technical plans. Every visual and technical aspect is meticulously planned before production.</p>
+<p data-lang="es" style="display:none;">Creamos storyboards, moodboards y planos técnicos detallados. Cada aspecto visual y técnico se planifica meticulosamente antes de la producción.</p>
 </div>
 <div class="tech-card">
-<h3>3. 🔧 Desarrollo y Producción</h3>
-<p><strong>ES:</strong> Nuestro equipo desarrolla los modelos 3D, animaciones, contenido AR y configuraciones de proyección. Utilizamos las últimas tecnologías y software de vanguardia.</p>
-<p><strong>EN:</strong> Our team develops 3D models, animations, AR content, and projection configurations. We use the latest technologies and cutting-edge software.</p>
+<h3 data-lang="en">3. 🔧 Development & Production</h3>
+<h3 data-lang="es" style="display:none;">3. 🔧 Desarrollo y Producción</h3>
+<p data-lang="en">Our team develops 3D models, animations, AR content, and projection configurations. We use the latest technologies and cutting-edge software.</p>
+<p data-lang="es" style="display:none;">Nuestro equipo desarrolla los modelos 3D, animaciones, contenido AR y configuraciones de proyección. Utilizamos las últimas tecnologías y software de vanguardia.</p>
 </div>
 <div class="tech-card">
-<h3>4. ✨ Integración y Testing</h3>
-<p><strong>ES:</strong> Probamos exhaustivamente cada componente en el entorno real. Ajustamos timings, colores y efectos para asegurar una experiencia perfecta.</p>
-<p><strong>EN:</strong> We exhaustively test each component in the real environment. We adjust timings, colors, and effects to ensure a perfect experience.</p>
+<h3 data-lang="en">4. ✨ Integration & Testing</h3>
+<h3 data-lang="es" style="display:none;">4. ✨ Integración y Testing</h3>
+<p data-lang="en">We exhaustively test each component in the real environment. We adjust timings, colors, and effects to ensure a perfect experience.</p>
+<p data-lang="es" style="display:none;">Probamos exhaustivamente cada componente en el entorno real. Ajustamos timings, colores y efectos para asegurar una experiencia perfecta.</p>
 </div>
 <div class="tech-card">
-<h3>5. 🚀 Implementación</h3>
-<p><strong>ES:</strong> El día del evento, nuestro equipo técnico está presente para asegurar una ejecución impecable. Monitoreamos cada detalle en tiempo real.</p>
-<p><strong>EN:</strong> On event day, our technical team is present to ensure flawless execution. We monitor every detail in real-time.</p>
+<h3 data-lang="en">5. 🚀 Implementation</h3>
+<h3 data-lang="es" style="display:none;">5. 🚀 Implementación</h3>
+<p data-lang="en">On event day, our technical team is present to ensure flawless execution. We monitor every detail in real-time.</p>
+<p data-lang="es" style="display:none;">El día del evento, nuestro equipo técnico está presente para asegurar una ejecución impecable. Monitoreamos cada detalle en tiempo real.</p>
 </div>
 <div class="tech-card">
-<h3>6. 📊 Post-Evento</h3>
-<p><strong>ES:</strong> Proporcionamos análisis de rendimiento, feedback del público y documentación completa. Cada proyecto nos ayuda a mejorar y evolucionar.</p>
-<p><strong>EN:</strong> We provide performance analytics, audience feedback, and complete documentation. Every project helps us improve and evolve.</p>
+<h3 data-lang="en">6. 📊 Post-Event</h3>
+<h3 data-lang="es" style="display:none;">6. 📊 Post-Evento</h3>
+<p data-lang="en">We provide performance analytics, audience feedback, and complete documentation. Every project helps us improve and evolve.</p>
+<p data-lang="es" style="display:none;">Proporcionamos análisis de rendimiento, feedback del público y documentación completa. Cada proyecto nos ayuda a mejorar y evolucionar.</p>
 </div>
 </div>
 </section>
 
 <section class="section">
-<h2 class="section-title">🏆 Por Qué Elegir LUMIK | Why Choose LUMIK</h2>
+<h2 class="section-title" data-lang="en">Why Choose LUMIK</h2>
+<h2 class="section-title" data-lang="es" style="display:none;">Por Qué Elegir LUMIK</h2>
 <div class="section-content">
-<p><strong>ES:</strong> No somos solo proveedores de tecnología; somos artistas visuales apasionados que entienden el poder de la narrativa visual y la conexión emocional.</p>
-<p><strong>EN:</strong> We are not just technology providers; we are passionate visual artists who understand the power of visual storytelling and emotional connection.</p>
+<p data-lang="en">We are not just technology providers; we are passionate visual artists who understand the power of visual storytelling and emotional connection.</p>
+<p data-lang="es" style="display:none;">No somos solo proveedores de tecnología; somos artistas visuales apasionados que entienden el poder de la narrativa visual y la conexión emocional.</p>
 </div>
 <div class="tech-grid">
 <div class="tech-card">
-<h3>🎭 Experiencia Artística</h3>
-<p><strong>ES:</strong> Con años de experiencia en diseño de iluminación, videomapping y arte visual, cada proyecto tiene una sensibilidad artística única.</p>
-<p><strong>EN:</strong> With years of experience in lighting design, videomapping, and visual art, every project has a unique artistic sensibility.</p>
+<h3 data-lang="en">🎭 Artistic Expertise</h3>
+<h3 data-lang="es" style="display:none;">🎭 Experiencia Artística</h3>
+<p data-lang="en">With years of experience in lighting design, videomapping, and visual art, every project has a unique artistic sensibility.</p>
+<p data-lang="es" style="display:none;">Con años de experiencia en diseño de iluminación, videomapping y arte visual, cada proyecto tiene una sensibilidad artística única.</p>
 </div>
 <div class="tech-card">
-<h3>🔬 Innovación Constante</h3>
-<p><strong>ES:</strong> Siempre exploramos nuevas tecnologías y técnicas. ARmapping es nuestra especialidad actual, combinando lo mejor de múltiples disciplinas.</p>
-<p><strong>EN:</strong> We always explore new technologies and techniques. ARmapping is our current specialty, combining the best of multiple disciplines.</p>
+<h3 data-lang="en">🔬 Constant Innovation</h3>
+<h3 data-lang="es" style="display:none;">🔬 Innovación Constante</h3>
+<p data-lang="en">We always explore new technologies and techniques. ARmapping is our current specialty, combining the best of multiple disciplines.</p>
+<p data-lang="es" style="display:none;">Siempre exploramos nuevas tecnologías y técnicas. ARmapping es nuestra especialidad actual, combinando lo mejor de múltiples disciplinas.</p>
 </div>
 <div class="tech-card">
-<h3>🤝 Colaboración Cercana</h3>
-<p><strong>ES:</strong> Trabajamos como partners con nuestros clientes, manteniendo comunicación constante y adaptándonos a sus necesidades evolutivas.</p>
-<p><strong>EN:</strong> We work as partners with our clients, maintaining constant communication and adapting to their evolving needs.</p>
+<h3 data-lang="en">🤝 Close Collaboration</h3>
+<h3 data-lang="es" style="display:none;">🤝 Colaboración Cercana</h3>
+<p data-lang="en">We work as partners with our clients, maintaining constant communication and adapting to their evolving needs.</p>
+<p data-lang="es" style="display:none;">Trabajamos como partners con nuestros clientes, manteniendo comunicación constante y adaptándonos a sus necesidades evolutivas.</p>
 </div>
 <div class="tech-card">
-<h3>🌍 Visión Global</h3>
-<p><strong>ES:</strong> Hemos trabajado en proyectos internacionales y entendemos diferentes culturas y audiencias. Nuestro trabajo trasciende fronteras.</p>
-<p><strong>EN:</strong> We have worked on international projects and understand different cultures and audiences. Our work transcends borders.</p>
+<h3 data-lang="en">🌍 Global Vision</h3>
+<h3 data-lang="es" style="display:none;">🌍 Visión Global</h3>
+<p data-lang="en">We have worked on international projects and understand different cultures and audiences. Our work transcends borders.</p>
+<p data-lang="es" style="display:none;">Hemos trabajado en proyectos internacionales y entendemos diferentes culturas y audiencias. Nuestro trabajo trasciende fronteras.</p>
 </div>
 <div class="tech-card">
-<h3>⚡ Entrega Puntual</h3>
-<p><strong>ES:</strong> Respetamos los plazos y entendemos la importancia crítica de los eventos. Nunca comprometemos la calidad por velocidad.</p>
-<p><strong>EN:</strong> We respect deadlines and understand the critical importance of events. We never compromise quality for speed.</p>
+<h3 data-lang="en">⚡ Timely Delivery</h3>
+<h3 data-lang="es" style="display:none;">⚡ Entrega Puntual</h3>
+<p data-lang="en">We respect deadlines and understand the critical importance of events. We never compromise quality for speed.</p>
+<p data-lang="es" style="display:none;">Respetamos los plazos y entendemos la importancia crítica de los eventos. Nunca comprometemos la calidad por velocidad.</p>
 </div>
 <div class="tech-card">
-<h3>💎 Calidad Premium</h3>
-<p><strong>ES:</strong> Cada detalle importa. Desde la resolución de los modelos 3D hasta la sincronización milimétrica de las proyecciones,追求 la perfección.</p>
-<p><strong>EN:</strong> Every detail matters. From 3D model resolution to millimeter-perfect projection synchronization, we pursue perfection.</p>
+<h3 data-lang="en">💎 Premium Quality</h3>
+<h3 data-lang="es" style="display:none;">💎 Calidad Premium</h3>
+<p data-lang="en">Every detail matters. From 3D model resolution to millimeter-perfect projection synchronization, we pursue perfection.</p>
+<p data-lang="es" style="display:none;">Cada detalle importa. Desde la resolución de los modelos 3D hasta la sincronización milimétrica de las proyecciones,追求 la perfección.</p>
 </div>
 </div>
 </section>
@@ -840,39 +931,136 @@ loading="eager"
 </div>
 
 <!-- Bottom Info -->
-<div class="bottom-bar" id="bottomBar">
+<div class="bottom-bar" id="bottomBar" data-lang="en">
+✦ LUMIK Technology ✦ 3D + AR + Videomapping + Laser Mapping ✦
+</div>
+<div class="bottom-bar" id="bottomBarEs" data-lang="es" style="display:none;">
 ✦ LUMIK Technology ✦ 3D + AR + Videomapping + Laser Mapping ✦
 </div>
 
 <script>
+// Language switching
+let currentLanguage = 'en';
+
+function setLanguage(lang){
+currentLanguage = lang;
+const langEnBtn = document.getElementById('langEn');
+const langEsBtn = document.getElementById('langEs');
+const arModeBtn = document.getElementById('arModeBtn');
+const infoModeBtn = document.getElementById('infoModeBtn');
+const arModeBtnEs = document.getElementById('arModeBtnEs');
+const infoModeBtnEs = document.getElementById('infoModeBtnEs');
+const customArBtn = document.getElementById('customArButton');
+const customArBtnEs = document.getElementById('customArButtonEs');
+const exitArBtn = document.getElementById('exitArButton');
+const exitArBtnEs = document.getElementById('exitArButtonEs');
+const bottomBar = document.getElementById('bottomBar');
+const bottomBarEs = document.getElementById('bottomBarEs');
+
+// Update language toggle buttons
+if(lang === 'en'){
+langEnBtn.classList.add('active');
+langEsBtn.classList.remove('active');
+} else {
+langEnBtn.classList.remove('active');
+langEsBtn.classList.add('active');
+}
+
+// Update mode toggle buttons
+if(lang === 'en'){
+arModeBtn.style.display = 'block';
+infoModeBtn.style.display = 'block';
+arModeBtnEs.style.display = 'none';
+infoModeBtnEs.style.display = 'none';
+} else {
+arModeBtn.style.display = 'none';
+infoModeBtn.style.display = 'none';
+arModeBtnEs.style.display = 'block';
+infoModeBtnEs.style.display = 'block';
+}
+
+// Update AR buttons
+if(lang === 'en'){
+customArBtn.style.display = 'block';
+customArBtnEs.style.display = 'none';
+exitArBtn.style.display = exitArBtn.style.display === 'block' ? 'block' : 'none';
+exitArBtnEs.style.display = 'none';
+bottomBar.style.display = bottomBar.style.display === 'block' ? 'block' : 'none';
+bottomBarEs.style.display = 'none';
+} else {
+customArBtn.style.display = 'none';
+customArBtnEs.style.display = 'block';
+exitArBtn.style.display = 'none';
+exitArBtnEs.style.display = exitArBtnEs.style.display === 'block' ? 'block' : 'none';
+bottomBar.style.display = 'none';
+bottomBarEs.style.display = bottomBarEs.style.display === 'block' ? 'block' : 'none';
+}
+
+// Update all content with data-lang attribute
+const elements = document.querySelectorAll('[data-lang]');
+elements.forEach(el => {
+if(el.getAttribute('data-lang') === lang){
+el.style.display = '';
+} else {
+el.style.display = 'none';
+}
+});
+
+console.log('Language set to:', lang);
+}
+
 // Mode switching
 function setMode(mode){
 const arBtn=document.getElementById('arModeBtn');
 const infoBtn=document.getElementById('infoModeBtn');
+const arBtnEs=document.getElementById('arModeBtnEs');
+const infoBtnEs=document.getElementById('infoModeBtnEs');
 const viewer=document.getElementById('arViewer');
 const panel=document.getElementById('infoPanel');
 const bottomBar=document.getElementById('bottomBar');
+const bottomBarEs=document.getElementById('bottomBarEs');
 const customArBtn=document.getElementById('customArButton');
+const customArBtnEs=document.getElementById('customArButtonEs');
 
 console.log('Setting mode:', mode);
 
 if(mode==='ar'){
+if(currentLanguage === 'en'){
 arBtn.classList.add('active');
 infoBtn.classList.remove('active');
+} else {
+arBtnEs.classList.add('active');
+infoBtnEs.classList.remove('active');
+}
 viewer.classList.remove('hidden');
 panel.classList.remove('active');
 panel.classList.add('hidden');
+if(currentLanguage === 'en'){
 bottomBar.style.display='block';
 customArBtn.style.display='block';
+} else {
+bottomBarEs.style.display='block';
+customArBtnEs.style.display='block';
+}
 console.log('AR mode activated');
 } else {
+if(currentLanguage === 'en'){
 arBtn.classList.remove('active');
 infoBtn.classList.add('active');
+} else {
+arBtnEs.classList.remove('active');
+infoBtnEs.classList.add('active');
+}
 viewer.classList.add('hidden');
 panel.classList.remove('hidden');
 panel.classList.add('active');
+if(currentLanguage === 'en'){
 bottomBar.style.display='none';
 customArBtn.style.display='none';
+} else {
+bottomBarEs.style.display='none';
+customArBtnEs.style.display='none';
+}
 console.log('Info mode activated, panel classes:', panel.className);
 }
 }
@@ -880,12 +1068,15 @@ console.log('Info mode activated, panel classes:', panel.className);
 // Custom AR Button functionality
 document.addEventListener('DOMContentLoaded',()=>{
 setMode('ar');
+setLanguage('en'); // Set default language to English
 
 const customArBtn=document.getElementById('customArButton');
+const customArBtnEs=document.getElementById('customArButtonEs');
 const exitArBtn=document.getElementById('exitArButton');
+const exitArBtnEs=document.getElementById('exitArButtonEs');
 const viewer=document.getElementById('arViewer');
 
-// Custom AR button click
+// Custom AR button click (English)
 customArBtn.addEventListener('click',()=>{
 if(viewer){
 viewer.activateAR();
@@ -894,10 +1085,31 @@ customArBtn.style.display='none';
 }
 });
 
-// Exit AR button click
+// Custom AR button click (Spanish)
+customArBtnEs.addEventListener('click',()=>{
+if(viewer){
+viewer.activateAR();
+exitArBtnEs.style.display='block';
+customArBtnEs.style.display='none';
+}
+});
+
+// Exit AR button click (English)
 exitArBtn.addEventListener('click',()=>{
 exitArBtn.style.display='none';
 customArBtn.style.display='block';
+// Exit AR mode
+if(viewer && viewer.exitAR){
+viewer.exitAR();
+}
+// Fallback: reload page to exit AR
+location.reload();
+});
+
+// Exit AR button click (Spanish)
+exitArBtnEs.addEventListener('click',()=>{
+exitArBtnEs.style.display='none';
+customArBtnEs.style.display='block';
 // Exit AR mode
 if(viewer && viewer.exitAR){
 viewer.exitAR();
@@ -912,6 +1124,8 @@ viewer.addEventListener('ar-status',(event)=>{
 if(event.detail.status==='failed'){
 exitArBtn.style.display='none';
 customArBtn.style.display='block';
+exitArBtnEs.style.display='none';
+customArBtnEs.style.display='block';
 }
 });
 }
