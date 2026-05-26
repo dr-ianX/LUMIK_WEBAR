@@ -63,7 +63,7 @@ body{
 margin:0;
 overflow-x:hidden;
 background:var(--darker);
-font-family:'Segoe UI',Arial,sans-serif;
+font-family:'Inter','Roboto','Helvetica Neue',Arial,sans-serif;
 color:var(--light);
 min-height:100vh;
 background:linear-gradient(135deg,#050505 0%,#0a0a0a 50%,#050505 100%);
@@ -90,6 +90,7 @@ padding:4px;
 backdrop-filter:blur(10px);
 border:1px solid rgba(255,255,255,0.1);
 box-shadow:0 4px 20px rgba(0,212,255,0.2);
+gap:4px;
 }
 
 /* Language Toggle */
@@ -126,13 +127,13 @@ box-shadow:0 0 15px rgba(0,212,255,0.4);
 }
 
 .mode-btn{
-padding:10px 20px;
+padding:8px 14px;
 border:none;
 background:transparent;
 color:var(--gray);
 cursor:pointer;
-border-radius:26px;
-font-size:14px;
+border-radius:20px;
+font-size:12px;
 font-weight:600;
 transition:all 0.3s;
 position:relative;
@@ -277,6 +278,52 @@ position:relative;
 z-index:1002;
 display:block;
 visibility:visible;
+opacity:0;
+transform:translateY(30px);
+animation:fadeInUp 0.6s ease forwards;
+}
+
+.section:nth-child(1){
+animation-delay:0.1s;
+}
+
+.section:nth-child(2){
+animation-delay:0.2s;
+}
+
+.section:nth-child(3){
+animation-delay:0.3s;
+}
+
+.section:nth-child(4){
+animation-delay:0.4s;
+}
+
+.section:nth-child(5){
+animation-delay:0.5s;
+}
+
+.section:nth-child(6){
+animation-delay:0.6s;
+}
+
+.section:nth-child(7){
+animation-delay:0.7s;
+}
+
+.section:nth-child(8){
+animation-delay:0.8s;
+}
+
+@keyframes fadeInUp{
+from{
+opacity:0;
+transform:translateY(30px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 
 .section-title{
@@ -434,6 +481,34 @@ transform:scale(1.08) translateY(-3px);
 box-shadow:0 8px 30px rgba(0,212,255,0.6),0 0 40px rgba(255,0,170,0.3);
 }
 
+/* Social Links */
+.social-links{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+margin-top:20px;
+}
+
+.social-link{
+color:var(--primary);
+text-decoration:none;
+font-weight:600;
+font-size:16px;
+padding:12px 24px;
+background:linear-gradient(135deg,rgba(0,212,255,0.1),rgba(255,0,170,0.1));
+border:1px solid rgba(0,212,255,0.3);
+border-radius:25px;
+transition:all 0.3s;
+backdrop-filter:blur(10px);
+}
+
+.social-link:hover{
+background:linear-gradient(90deg,var(--primary),var(--secondary));
+color:var(--dark);
+transform:translateY(-3px);
+box-shadow:0 5px 20px rgba(0,212,255,0.4);
+}
+
 /* Bottom Info */
 .bottom-bar{
 position:fixed;
@@ -535,8 +610,10 @@ animation:gradient 3s ease infinite;
 <div class="mode-toggle">
 <button class="mode-btn active" id="arModeBtn" onclick="setMode('ar')" data-lang="en">AR View</button>
 <button class="mode-btn" id="infoModeBtn" onclick="setMode('info')" data-lang="en">Info</button>
+<button class="mode-btn" id="salesModeBtn" onclick="setMode('sales')" data-lang="en">Sales</button>
 <button class="mode-btn active" id="arModeBtnEs" onclick="setMode('ar')" data-lang="es" style="display:none;">Vista AR</button>
 <button class="mode-btn" id="infoModeBtnEs" onclick="setMode('info')" data-lang="es" style="display:none;">Info</button>
+<button class="mode-btn" id="salesModeBtnEs" onclick="setMode('sales')" data-lang="es" style="display:none;">Ventas</button>
 </div>
 
 <!-- Language Toggle -->
@@ -931,6 +1008,83 @@ disable-ar
 
 </div>
 
+<!-- Sales Panel -->
+<div class="info-panel" id="salesPanel">
+<header class="header">
+<h1 class="logo">LUMIK AR</h1>
+<p class="tagline" data-lang="en">Sales & Inquiries</p>
+<p class="tagline" data-lang="es" style="display:none;">Ventas y Consultas</p>
+</header>
+
+<section class="section">
+<h2 class="section-title" data-lang="en">Work With DOCTOR IAN</h2>
+<h2 class="section-title" data-lang="es" style="display:none;">Trabaja con DOCTOR IAN</h2>
+<div class="section-content">
+<p data-lang="en">Transform your vision into immersive reality. As an audiovisual, multidisciplinary, and immersive artist, I develop custom technology and create bespoke experiences.</p>
+<p data-lang="es" style="display:none;">Transforma tu visión en realidad inmersiva. Como artista audiovisual, multidisciplinario e inmersivo, desarrollo tecnología personalizada y creo experiencias a medida.</p>
+</div>
+</section>
+
+<section class="section">
+<h2 class="section-title" data-lang="en">Services Available</h2>
+<h2 class="section-title" data-lang="es" style="display:none;">Servicios Disponibles</h2>
+<div class="tech-grid">
+<div class="tech-card">
+<h3 data-lang="en">🎨 Custom AR Experiences</h3>
+<h3 data-lang="es" style="display:none;">🎨 Experiencias AR Personalizadas</h3>
+<p data-lang="en">Bespoke augmented reality installations for events, exhibitions, and brand activations.</p>
+<p data-lang="es" style="display:none;">Instalaciones de realidad aumentada a medida para eventos, exposiciones y activaciones de marca.</p>
+</div>
+<div class="tech-card">
+<h3 data-lang="en">🎬 Videomapping</h3>
+<h3 data-lang="es" style="display:none;">🎬 Videomapping</h3>
+<p data-lang="en">Projection mapping for buildings, stages, and custom surfaces with synchronized content.</p>
+<p data-lang="es" style="display:none;">Proyección mapping para edificios, escenarios y superficies personalizadas con contenido sincronizado.</p>
+</div>
+<div class="tech-card">
+<h3 data-lang="en">⚡ Laser Mapping</h3>
+<h3 data-lang="es" style="display:none;">⚡ Laser Mapping</h3>
+<p data-lang="en">Precision laser installations with dynamic programming and remote control capabilities.</p>
+<p data-lang="es" style="display:none;">Instalaciones láser de precisión con programación dinámica y capacidades de control remoto.</p>
+</div>
+<div class="tech-card">
+<h3 data-lang="en">🎵 Spatial Sound</h3>
+<h3 data-lang="es" style="display:none;">🎵 Sonido Espacial</h3>
+<p data-lang="en">Immersive audio experiences that complement visual installations with 3D spatial audio.</p>
+<p data-lang="es" style="display:none;">Experiencias de audio inmersivas que complementan instalaciones visuales con audio espacial 3D.</p>
+</div>
+</div>
+</section>
+
+<section class="section">
+<h2 class="section-title" data-lang="en">Get In Touch</h2>
+<h2 class="section-title" data-lang="es" style="display:none;">Contáctanos</h2>
+<div class="section-content">
+<p data-lang="en">Ready to create something extraordinary? Let's discuss your project.</p>
+<p data-lang="es" style="display:none;">¿Listo para crear algo extraordinario? Hablemos de tu proyecto.</p>
+<a href="mailto:hello@lumik.ar" class="contact-btn" data-lang="en">✉ CONTACT ME</a>
+<a href="mailto:hello@lumik.ar" class="contact-btn" data-lang="es" style="display:none;">✓ CONTÁCTAME</a>
+</div>
+</section>
+
+<section class="section">
+<h2 class="section-title" data-lang="en">Social Media</h2>
+<h2 class="section-title" data-lang="es" style="display:none;">Redes Sociales</h2>
+<div class="section-content">
+<p data-lang="en">Follow DOCTOR IAN for updates on latest projects and installations.</p>
+<p data-lang="es" style="display:none;">Sigue a DOCTOR IAN para actualizaciones sobre los últimos proyectos e instalaciones.</p>
+<div class="social-links">
+<a href="#" class="social-link" data-lang="en">Instagram</a>
+<a href="#" class="social-link" data-lang="es" style="display:none;">Instagram</a>
+<a href="#" class="social-link" data-lang="en">YouTube</a>
+<a href="#" class="social-link" data-lang="es" style="display:none;">YouTube</a>
+<a href="#" class="social-link" data-lang="en">LinkedIn</a>
+<a href="#" class="social-link" data-lang="es" style="display:none;">LinkedIn</a>
+</div>
+</div>
+</section>
+</div>
+
 <!-- Bottom Info -->
 <div class="bottom-bar" id="bottomBar" data-lang="en">
 ✦ LUMIK Technology ✦ 3D + AR + Videomapping + Laser Mapping ✦
@@ -949,8 +1103,10 @@ const langEnBtn = document.getElementById('langEn');
 const langEsBtn = document.getElementById('langEs');
 const arModeBtn = document.getElementById('arModeBtn');
 const infoModeBtn = document.getElementById('infoModeBtn');
+const salesModeBtn = document.getElementById('salesModeBtn');
 const arModeBtnEs = document.getElementById('arModeBtnEs');
 const infoModeBtnEs = document.getElementById('infoModeBtnEs');
+const salesModeBtnEs = document.getElementById('salesModeBtnEs');
 const customArBtn = document.getElementById('customArButton');
 const customArBtnEs = document.getElementById('customArButtonEs');
 const exitArBtn = document.getElementById('exitArButton');
@@ -971,13 +1127,17 @@ langEsBtn.classList.add('active');
 if(lang === 'en'){
 arModeBtn.style.display = 'block';
 infoModeBtn.style.display = 'block';
+salesModeBtn.style.display = 'block';
 arModeBtnEs.style.display = 'none';
 infoModeBtnEs.style.display = 'none';
+salesModeBtnEs.style.display = 'none';
 } else {
 arModeBtn.style.display = 'none';
 infoModeBtn.style.display = 'none';
+salesModeBtn.style.display = 'none';
 arModeBtnEs.style.display = 'block';
 infoModeBtnEs.style.display = 'block';
+salesModeBtnEs.style.display = 'block';
 }
 
 // Update AR buttons
@@ -1014,10 +1174,13 @@ console.log('Language set to:', lang);
 function setMode(mode){
 const arBtn=document.getElementById('arModeBtn');
 const infoBtn=document.getElementById('infoModeBtn');
+const salesBtn=document.getElementById('salesModeBtn');
 const arBtnEs=document.getElementById('arModeBtnEs');
 const infoBtnEs=document.getElementById('infoModeBtnEs');
+const salesBtnEs=document.getElementById('salesModeBtnEs');
 const viewer=document.getElementById('arViewer');
 const panel=document.getElementById('infoPanel');
+const salesPanel=document.getElementById('salesPanel');
 const bottomBar=document.getElementById('bottomBar');
 const bottomBarEs=document.getElementById('bottomBarEs');
 const customArBtn=document.getElementById('customArButton');
@@ -1029,13 +1192,17 @@ if(mode==='ar'){
 if(currentLanguage === 'en'){
 arBtn.classList.add('active');
 infoBtn.classList.remove('active');
+salesBtn.classList.remove('active');
 } else {
 arBtnEs.classList.add('active');
 infoBtnEs.classList.remove('active');
+salesBtnEs.classList.remove('active');
 }
 viewer.classList.remove('hidden');
 panel.classList.remove('active');
 panel.classList.add('hidden');
+salesPanel.classList.remove('active');
+salesPanel.classList.add('hidden');
 if(currentLanguage === 'en'){
 bottomBar.style.display='block';
 customArBtn.style.display='block';
@@ -1044,17 +1211,21 @@ bottomBarEs.style.display='block';
 customArBtnEs.style.display='block';
 }
 console.log('AR mode activated');
-} else {
+} else if(mode==='info'){
 if(currentLanguage === 'en'){
 arBtn.classList.remove('active');
 infoBtn.classList.add('active');
+salesBtn.classList.remove('active');
 } else {
 arBtnEs.classList.remove('active');
 infoBtnEs.classList.add('active');
+salesBtnEs.classList.remove('active');
 }
 viewer.classList.add('hidden');
 panel.classList.remove('hidden');
 panel.classList.add('active');
+salesPanel.classList.remove('active');
+salesPanel.classList.add('hidden');
 if(currentLanguage === 'en'){
 bottomBar.style.display='none';
 customArBtn.style.display='none';
@@ -1063,6 +1234,29 @@ bottomBarEs.style.display='none';
 customArBtnEs.style.display='none';
 }
 console.log('Info mode activated, panel classes:', panel.className);
+} else if(mode==='sales'){
+if(currentLanguage === 'en'){
+arBtn.classList.remove('active');
+infoBtn.classList.remove('active');
+salesBtn.classList.add('active');
+} else {
+arBtnEs.classList.remove('active');
+infoBtnEs.classList.remove('active');
+salesBtnEs.classList.add('active');
+}
+viewer.classList.add('hidden');
+panel.classList.remove('active');
+panel.classList.add('hidden');
+salesPanel.classList.remove('hidden');
+salesPanel.classList.add('active');
+if(currentLanguage === 'en'){
+bottomBar.style.display='none';
+customArBtn.style.display='none';
+} else {
+bottomBarEs.style.display='none';
+customArBtnEs.style.display='none';
+}
+console.log('Sales mode activated');
 }
 }
 
